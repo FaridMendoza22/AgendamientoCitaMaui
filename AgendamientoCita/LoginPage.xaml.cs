@@ -11,6 +11,6 @@ public partial class LoginPage : ContentPage
     private async void OnSignInButtonClicked(object sender, EventArgs e)
     {
         // Navegar a la nueva página
-        App.Current.MainPage = new NavigationPage(new HomePage());
+        App.Current!.MainPage = new NavigationPage(new HomePage());
     }
 }

@@ -2,27 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgendamientoCita.View.HomePage"
-             Title="HomePage">
+             Title="Gestiona tu cita">
 
     <StackLayout>
         <Label Text="Home" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
         <Label Text="Hola Carlos" FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
-        <StackLayout Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
             <Button Text="AGENDAR" Clicked="AgendarCita" />
             <Button Text="VER CITAS" Clicked="VerCitas" />
         </StackLayout>
 
         <Button Text="CITA" Clicked="CrearCita" />
 
-        <Image Source="icon.png" WidthRequest="100" HeightRequest="100" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Image Source="icon.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" />
 
-        <StackLayout Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
             <Button Text="CONOCE" Clicked="ConocerCharlysSalon" />
             <Button Text="SALIR" Clicked="Salir" />
         </StackLayout>
     </StackLayout>
 
-</ContentPage>
 </ContentPage>

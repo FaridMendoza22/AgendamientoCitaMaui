@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
 
 namespace AgendamientoCita.View;
 
@@ -17,7 +11,7 @@ public partial class HomePage : ContentPage
     private void AgendarCita(object sender, EventArgs e)
     {
         // Navegar a la página de agendar cita
-        //Navigation.PushAsync(new AgendarCitasPage());
+        Navigation.PushAsync(new AgendarCitas());
     }
 
     private void VerCitas(object sender, EventArgs e)
@@ -41,7 +35,7 @@ public partial class HomePage : ContentPage
     private void Salir(object sender, EventArgs e)
     {
         // Salir de la aplicación
-        Application.Current.Quit();
+        //Application.Current.Quit();
     }
 }
 
