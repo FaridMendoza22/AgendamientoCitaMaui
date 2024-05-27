@@ -65,10 +65,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\AgendarCitasPage.xaml.cs">
+	    <DependentUpon>AgendarCitasPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\VerCitasPage.xaml.cs">
+	    <DependentUpon>VerCitasPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\AgendarCitasPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\VerCitasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
