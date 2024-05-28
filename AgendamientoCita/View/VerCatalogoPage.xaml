@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendamientoCita.View.VerCatalogoPage"
+             Title="Ver Catálogo">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Catálogo de Servicios" 
+                   FontSize="Large" 
+                   HorizontalOptions="Center"
+                   Margin="10"/>
+            <CollectionView x:Name="CatalogosCollectionView"
+                            SelectionMode="None" IsVisible="{Binding HasData}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" 
+                                       FontSize="Medium"
+                                       TextColor="Blue"
+                                       FontAttributes="Bold"/>
+
+                                <CollectionView ItemsSource="{Binding Services}"
+                                                SelectionMode="Single"
+                                                SelectionChanged="OnServicioSelected">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="5" Margin="3" BorderColor="Gray" CornerRadius="3">
+                                                <StackLayout>
+                                                    <Label Text="{Binding Name}" 
+                                                           FontSize="Small" TextColor="Black"
+                                                           FontAttributes="Bold"/>
+                                                    <Label Text="{Binding Description}" TextColor="Black"
+                                                           FontSize="Small"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout x:Name="NoDataView"
+                             IsVisible="{Binding HasData, Converter={StaticResource InverseBooleanConverter}}"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand">
+                <Image Source="nocatalogo.png" 
+                           WidthRequest="100" 
+                           HeightRequest="100" 
+                           HorizontalOptions="Center"/>
+                <Label Text="No se encontraron catálogos" 
+                           FontSize="Medium" 
+                           HorizontalOptions="Center"
+                           Margin="10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
