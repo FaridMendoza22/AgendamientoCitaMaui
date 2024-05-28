@@ -4,24 +4,63 @@
              x:Class="AgendamientoCita.View.HomePage"
              Title="Gestiona tu cita">
 
-    <StackLayout>
-        <Label Text="Home" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+    <StackLayout Spacing="20" Padding="20">
+        <!-- Title -->
+        <Label Text="Home" 
+               FontSize="Title" 
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="Center" />
 
-        <Label Text="Hola Carlos" FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+        <!-- Welcome Message -->
+        <Label Text="Hola Carlos" 
+               FontSize="Subtitle" 
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="Center" />
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Text="AGENDAR" Clicked="AgendarCita" />
-            <Button Text="VER CITAS" Clicked="VerCitas" />
-        </StackLayout>
+        <!-- Image -->
+        <Image Source="acceso.png" 
+               WidthRequest="100" 
+               HeightRequest="100" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" />
 
-        <Button Text="CITA" Clicked="CrearCita" />
+        <!-- Buttons in Grid -->
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Image Source="icon.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Button Text="Agendar" 
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    Margin="5" 
+                    Clicked="AgendarCita" />
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Text="CONOCE" Clicked="ConocerCharlysSalon" />
-            <Button Text="SALIR" Clicked="Salir" />
-        </StackLayout>
+            <Button Text="Ver Catalogo" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Margin="5" 
+                    Clicked="VerCatalogo" />
+
+            <Button Text="Ver citas" 
+                    Grid.Row="1" 
+                    Grid.ColumnSpan="2" 
+                    Margin="5" 
+                    Clicked="VerCitas" />
+
+            <Button Text="Salir" 
+                    Grid.Row="2" 
+                    Grid.ColumnSpan="2" 
+                    Margin="5" 
+                    Clicked="Salir" />
+        </Grid>
     </StackLayout>
-
 </ContentPage>
+
+

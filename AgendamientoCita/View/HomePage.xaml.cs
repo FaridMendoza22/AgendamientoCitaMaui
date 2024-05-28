@@ -17,25 +17,21 @@ public partial class HomePage : ContentPage
     private void VerCitas(object sender, EventArgs e)
     {
         // Navegar a la página de ver citas
-       //Navigation.PushAsync(new VerCitasPage());
+       Navigation.PushAsync(new VerCitas());
     }
 
-    private void CrearCita(object sender, EventArgs e)
+    private void VerCatalogo(object sender, EventArgs e)
     {
         // Crear una nueva cita
         // ...
-    }
+        Navigation.PushAsync(new VerCatalogoPage());
 
-    private void ConocerCharlysSalon(object sender, EventArgs e)
-    {
-        // Abrir una página web con información sobre Charly's Salon
-        // ...
     }
 
     private void Salir(object sender, EventArgs e)
     {
         // Salir de la aplicación
-        //Application.Current.Quit();
+        App.Current!.MainPage = new NavigationPage(new LoginPage());
     }
 }
 
