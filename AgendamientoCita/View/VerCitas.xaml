@@ -1,12 +1,76 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AgendamientoCita.View.VerCitas"
-             Title="VerCitas">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="AgendamientoCita.View.VerCitasPage"
+             Title="Ver Citas">
+
+  
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Ver Citas" 
+                   FontSize="Large" 
+                   HorizontalOptions="Center"
+                   Margin="10"/>
+            <Grid>
+                <!-- CollectionView for cita items -->
+                <CollectionView x:Name="CitasCollectionView"
+                                SelectionMode="None"
+                                IsVisible="{Binding HasData}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" Margin="5" BorderColor="Gray" CornerRadius="5">
+                                <StackLayout>
+                                    <Label Text="{Binding State, Converter={StaticResource StateConverter}}" 
+                                           FontSize="Medium"
+                                           TextColor="Blue"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding StartTime, StringFormat='Fecha y hora de inicio: {0:dd/MM/yyyy HH:mm}'}" 
+                                           FontSize="Small"
+                                           TextColor="Blue"/>
+                                    <Label Text="{Binding EndTime, StringFormat='Fecha y hora final: {0:dd/MM/yyyy HH:mm}'}" 
+                                           FontSize="Small" TextColor="Blue" />
+                                    <Label Text="{Binding PaymentState, Converter={StaticResource PaymentStateConverter}}" 
+                                           FontSize="Small" TextColor="Blue" />
+                                    <CollectionView ItemsSource="{Binding Services}"
+                                                    SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Padding="5" Margin="3" BorderColor="LightGray" CornerRadius="3">
+                                                    <StackLayout>
+                                                        <Label Text="{Binding Service.Name}" 
+                                                               FontSize="Small" 
+                                                               TextColor="Blue"
+                                                               FontAttributes="Bold"/>
+                                                        <Label Text="{Binding Service.Description}" TextColor="Blue"
+                                                               FontSize="Small"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- No data view -->
+                <StackLayout x:Name="NoDataView"
+                             IsVisible="{Binding HasNoData}"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand">
+                    <Image Source="no_data_icon.png" 
+                           WidthRequest="100" 
+                           HeightRequest="100" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="No se encontraron citas" 
+                           FontSize="Medium" 
+                           HorizontalOptions="Center"
+                           Margin="10"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
+

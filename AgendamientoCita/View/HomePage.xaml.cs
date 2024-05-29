@@ -17,7 +17,7 @@ public partial class HomePage : ContentPage
     private void VerCitas(object sender, EventArgs e)
     {
         // Navegar a la página de ver citas
-       Navigation.PushAsync(new VerCitas());
+       Navigation.PushAsync(new VerCitasPage());
     }
 
     private void VerCatalogo(object sender, EventArgs e)

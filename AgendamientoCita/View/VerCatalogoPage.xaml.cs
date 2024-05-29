@@ -11,7 +11,7 @@ namespace AgendamientoCita.View
     public partial class VerCatalogoPage : ContentPage
     {
         private string _backendUrl = "https://configurationmodulebackend20240519113346.azurewebsites.net/api/Catalogue/getDataWithServices"; // Reemplace con la URL real de su back-end
-        private bool HasNoData => !HasData;
+        private bool HasNoData { get; set; } = true;
         public bool HasData;
         public VerCatalogoPage()
         {
@@ -25,6 +25,7 @@ namespace AgendamientoCita.View
         {
             var catalogos = await ObtenerCatalogosYServicios();
             HasData = catalogos.Count > 0;
+            HasNoData = !HasData;
             CatalogosCollectionView.ItemsSource = catalogos;
         }
 

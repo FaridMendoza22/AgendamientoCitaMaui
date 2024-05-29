@@ -44,7 +44,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <StackLayout x:Name="NoDataView"
-                             IsVisible="{Binding HasData, Converter={StaticResource InverseBooleanConverter}}"
+                             IsVisible="{Binding HasNoData}"
                              VerticalOptions="CenterAndExpand"
                              HorizontalOptions="CenterAndExpand">
                 <Image Source="nocatalogo.png" 
