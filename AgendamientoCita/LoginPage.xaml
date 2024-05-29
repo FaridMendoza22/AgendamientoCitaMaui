@@ -59,7 +59,7 @@
 
                 </StackLayout>
 
-                <Button Text="Sing In" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
+                <Button x:Name="btnSession" Text="Sing In" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
 
