@@ -18,7 +18,7 @@ public partial class AgendarCitas : ContentPage
         _ = CargarEmpleados();
 
         // Cargar servicios desde la API
-        CargarServicios();
+        _ = CargarServicios();
     }
 
     async Task CargarEmpleados()
@@ -49,9 +49,8 @@ public partial class AgendarCitas : ContentPage
 
     public void AgregarServicio_Clicked(object sender, EventArgs e)
     {
-        collectionView.ItemsSource ??= new List<Service>();
-
         ServicesSelected.Add((Service) servicePicker.SelectedItem);
+        collectionView.ItemsSource = ServicesSelected.ToList();
     }
 
     public void GuardarCita_Clicked(object sender, EventArgs e)
@@ -64,22 +63,23 @@ public partial class AgendarCitas : ContentPage
         var Data = new Customer.Entities.Appointment()
         {
             StartTime = startDatePicker.Date + startTimePicker.Time,
-            EndTime = endDatePicker.Date + endTimePicker.Time,
+            EndTime = startDatePicker.Date + endTimePicker.Time,
             State = EnumAppointmentState.Scheduled,
             PaymentState = EnumPaymentState.Pending,
-            RowidCustomer = 34,//Reemplazar por el de la bd,
+            RowidCustomer = App.CustomerInSession!.Rowid,//Reemplazar por el de la bd,
             RowidEmployee = ((Employee)employeePicker.SelectedItem).Rowid,
             Services = ServicesSelected.Select(x => new AppointmentDetail()
             {
                 RowidService = x.Rowid,
             }).ToList(),
         };
-        var json = JsonConvert.SerializeObject(new { });
+        var json = JsonConvert.SerializeObject(Data);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         using (var client = new HttpClient())
         {
-            var response = await client.PostAsync("https://customermodulebackend20240520205729.azurewebsites.net/api/Appointment", content);
+            var response = await client.PostAsync("https://customermodulebackend20240520205729.azurewebsites.net/api/Appointment/SaveWithDetails", content);
+            string contenidoRespuesta = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
                 _ = Navigation.PopAsync();

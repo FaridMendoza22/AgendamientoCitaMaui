@@ -1,13 +1,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgendamientoCita.View.AgendarCitas">
-    <StackLayout Margin="20">
+    <VerticalStackLayout Margin="20">
         <Label Text="Fecha de inicio" />
         <DatePicker x:Name="startDatePicker" />
         <TimePicker x:Name="startTimePicker" />
 
-        <Label Text="Fecha de fin" />
-        <DatePicker x:Name="endDatePicker" />
+        <Label Text="Hora de fin" />
         <TimePicker x:Name="endTimePicker" />
 
         <Label Text="Empleado" />
@@ -18,17 +17,17 @@
         <Button Text="Agregar Servicio" Clicked="AgregarServicio_Clicked" />
 
         <Label Text="Servicios agregados" />
-        <CollectionView x:Name="collectionView">
+        <CollectionView x:Name="collectionView" Margin="10">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="Servicio:" />
+                    <HorizontalStackLayout>
+                        <Label Text="Servicio:" Margin="0,0,10,10" />
                         <Label Text="{Binding Name}"  />
-                    </VerticalStackLayout>
+                    </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <Button Text="Guardar Cita" Clicked="GuardarCita_Clicked" />
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>
