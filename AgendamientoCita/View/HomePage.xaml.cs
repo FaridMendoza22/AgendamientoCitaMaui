@@ -4,9 +4,11 @@ namespace AgendamientoCita.View;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+    readonly LocalDbService dbService;
+    public HomePage()
 	{
-		InitializeComponent();
+        dbService = MauiProgram.Services.GetService<LocalDbService>()!;
+        InitializeComponent();
 	}
     private void AgendarCita(object sender, EventArgs e)
     {
@@ -30,6 +32,8 @@ public partial class HomePage : ContentPage
 
     private void Salir(object sender, EventArgs e)
     {
+        _ = dbService.DeleteCustomer();
+        App.CustomerInSession = null;
         // Salir de la aplicación
         App.Current!.MainPage = new NavigationPage(new LoginPage());
     }

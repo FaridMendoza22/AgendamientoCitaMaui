@@ -5,11 +5,7 @@ using AgendamientoCita.View;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Customer.Entities;
-using Android.Webkit;
-using Configuration.Entities;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
@@ -17,9 +13,20 @@ namespace AgendamientoCita
 {
     public partial class LoginPage : ContentPage
     {
+        readonly LocalDbService dbService;
+
         public LoginPage()
         {
             InitializeComponent();
+            dbService = MauiProgram.Services.GetService<LocalDbService>()!;
+
+            var User = dbService.GetCustomer().GetAwaiter().GetResult();
+
+            if (User is not null)
+            {
+                App.Current!.MainPage = new NavigationPage(new HomePage());
+            }
+
             BindingContext = new LoginViewModel();
         }
 
@@ -32,7 +39,7 @@ namespace AgendamientoCita
 
                 if(Customer is null)
                 {
-                    await DisplayAlert("Error", "Login failed. Please check your credentials.", "OK");
+                    await DisplayAlert("Error", "Credenciales inválidas", "OK");
                     return;
                 }
 
@@ -41,17 +48,25 @@ namespace AgendamientoCita
 
                 if (!string.IsNullOrEmpty(token))
                 {
-                    //AQUI SE VA A CREAR LA INFO EN LA BD
+                    await dbService.CreateCustomer(new()
+                    {
+                        Token = token,
+                        Email = viewModel.UserName,
+                        Fullname = Customer.Name + " " + Customer.LastName,
+                        Rowid = Customer.Rowid
+                    });
+
+                    App.CustomerInSession = await dbService.GetCustomer();
 
                     App.Current!.MainPage = new NavigationPage(new HomePage());
-                    await DisplayAlert("Success", "Login successful!", "OK");
+                    await DisplayAlert("Success", "Inicio de sesion exitoso", "OK");
                     // Navega a otra p�gina o realiza alguna
                      
 
                 }
                 else
                 {
-                    await DisplayAlert("Error", "Login failed. Please check your credentials.", "OK");
+                    await DisplayAlert("Error", "Credenciales inválidas", "OK");
                 }
 
                 btnSession.IsEnabled = true;
@@ -80,14 +95,14 @@ namespace AgendamientoCita
                     }
                     else
                     {
-                        throw new Exception($"No se pudieron obtener catálogos y servicios: {respuesta.StatusCode}");
+                        throw new Exception($"Error al crear al cliente: {respuesta.StatusCode}");
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Maneje cualquier excepción que ocurra durante la solicitud
-                Console.WriteLine($"Error al obtener catálogos y servicios: {ex.Message}");
+                Console.WriteLine($"Error al crear al cliente: {ex.Message}");
                 return default;
             }
         }
@@ -128,15 +143,22 @@ namespace AgendamientoCita
 
                 if (!string.IsNullOrEmpty(token))
                 {
-                    //AQUI SE VA A CREAR LA INFO EN LA BD
+                    await dbService.CreateCustomer(new()
+                    {
+                        Token = token,
+                        Email = viewModel.UserName,
+                        Fullname = newClient.Name + " " + newClient.LastName,
+                        Rowid = newClient.Rowid
+                    });
+                    App.CustomerInSession = await dbService.GetCustomer();
                     App.Current!.MainPage = new NavigationPage(new HomePage());
-                    _ = DisplayAlert("Success", "Register successful!", "OK");
+                    _ = DisplayAlert("Success", "Registro exitoso", "OK");
                     // Navega a otra p�gina o realiza alguna
 
                 }
                 else
                 {
-                    _ = DisplayAlert("Error", "Login failed. Please check your credentials.", "OK");
+                    _ = DisplayAlert("Error", "Credenciales inválidas", "OK");
                 }
 
                 btnSession.IsEnabled = true;

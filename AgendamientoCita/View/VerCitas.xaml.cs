@@ -55,7 +55,7 @@ namespace AgendamientoCita.View
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var solicitud = new HttpRequestMessage(HttpMethod.Get, $"{_backendUrl}34");
+                    var solicitud = new HttpRequestMessage(HttpMethod.Get, $"{_backendUrl}{App.CustomerInSession!.Rowid}");
 
                     var respuesta = await client.SendAsync(solicitud);
 

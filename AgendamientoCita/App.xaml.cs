@@ -1,13 +1,14 @@
-﻿namespace AgendamientoCita
+﻿using AgendamientoCita.View;
+
+namespace AgendamientoCita
 {
     public partial class App : Application
     {
+        public static CustomerInSession? CustomerInSession { get; set; }
         public App()
         {
             InitializeComponent();
-            //si hay info en la bd, iniciar en home
-            MainPage = new NavigationPage(new LoginPage());
-          
+            MainPage = new NavigationPage(new LoginPage());          
         }
     }
 }
