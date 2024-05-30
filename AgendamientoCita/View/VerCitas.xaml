@@ -8,10 +8,6 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Ver Citas" 
-                   FontSize="Large" 
-                   HorizontalOptions="Center"
-                   Margin="10"/>
             <Grid>
                 <!-- CollectionView for cita items -->
                 <CollectionView x:Name="CitasCollectionView"
