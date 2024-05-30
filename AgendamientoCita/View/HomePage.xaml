@@ -12,7 +12,7 @@
                VerticalTextAlignment="Center" />
 
         <!-- Welcome Message -->
-        <Label Text="Hola Carlos" 
+        <Label Text="{Binding TextValue}" 
                FontSize="Subtitle" 
                HorizontalTextAlignment="Center" 
                VerticalTextAlignment="Center" />

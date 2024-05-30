@@ -4,6 +4,7 @@ namespace AgendamientoCita.View;
 
 public partial class HomePage : ContentPage
 {
+    public string TextValue { get; set; } = App.CustomerInSession!.Fullname;
     readonly LocalDbService dbService;
     public HomePage()
 	{
