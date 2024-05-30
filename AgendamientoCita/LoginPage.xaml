@@ -64,7 +64,8 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
 
                     <Label Text="New User" TextColor="DarkGray" FontSize="Small"/>
-                    <Label Text="Sing Up" TextColor="#1d8348" FontAttributes="Bold" FontSize="Small"/>
+                    <Button Text="Sing Up" TextColor="#1d8348" FontAttributes="Bold" FontSize="Small" Clicked="OnRegisterLabel"/>
+                    
                 </StackLayout>
                     
             </StackLayout>

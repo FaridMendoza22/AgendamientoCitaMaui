@@ -30,7 +30,7 @@ namespace AgendamientoCita
                 {
                     App.Current!.MainPage = new NavigationPage(new HomePage());
                     await DisplayAlert("Success", "Login successful!", "OK");
-                    // Navega a otra página o realiza alguna
+                    // Navega a otra pï¿½gina o realiza alguna
                      
 
                 }
@@ -42,7 +42,33 @@ namespace AgendamientoCita
                 btnSession.IsEnabled = true;
             }
         }
+        public async void OnRegisterLabel(object sender, EventArgs e)
+        {
+            var viewModel = BindingContext as LoginViewModel;
+            if (viewModel != null)
+            {
+                btnSession.IsEnabled = false;
+                bool loginSuccessful = await viewModel.RegisterAsync();
+
+                if (loginSuccessful)
+                {
+                    App.Current!.MainPage = new NavigationPage(new HomePage());
+                    _ = DisplayAlert("Success", "Register successful!", "OK");
+                    // Navega a otra pï¿½gina o realiza alguna
+
+
+                }
+                else
+                {
+                    _ = DisplayAlert("Error", "Login failed. Please check your credentials.", "OK");
+                }
+
+                btnSession.IsEnabled = true;
+            }
+        }
     }
+}
+     
 
     public class LoginViewModel : BindableObject
     {
@@ -58,6 +84,7 @@ namespace AgendamientoCita
                 OnPropertyChanged();
             }
         }
+    
 
         public string Password
         {
@@ -98,7 +125,7 @@ namespace AgendamientoCita
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    // Puedes procesar el contenido de la respuesta aquí si es necesario
+                    // Puedes procesar el contenido de la respuesta aquï¿½ si es necesario
                     return true;
                 }
                 else
@@ -106,9 +133,44 @@ namespace AgendamientoCita
                     return false;
                 }
             }
+            
         }
+
+    public async Task<bool> RegisterAsync()
+    {
+        if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+        {
+            return false;
+        }
+
+        var loginData = new
+        {
+            username = UserName,
+            password = Password
+        };
+
+        var json = JsonConvert.SerializeObject(loginData);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (var client = new HttpClient())
+        {
+            var response = await client.PostAsync("https://authenticationmodule.azurewebsites.net/register", content);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                // Puedes procesar el contenido de la respuesta aquï¿½ si es necesario
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
+
 }
+
 
 //public partial class LoginPage : ContentPage
 //{
@@ -118,7 +180,7 @@ namespace AgendamientoCita
 //	}
 //    private async void OnSignInButtonClicked(object sender, EventArgs e)
 //    {
-//        // Navegar a la nueva página
+//        // Navegar a la nueva pï¿½gina
 //        App.Current!.MainPage = new NavigationPage(new HomePage());
 //    }
 //}
