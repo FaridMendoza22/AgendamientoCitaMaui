@@ -40,7 +40,7 @@
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding UserName}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
                 <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
@@ -48,23 +48,15 @@
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding Password}" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0" >
-                    <CheckBox IsChecked="False"/>
-                    <Label Text="Recordar cuenta" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Label Text="Cerrar sesion" TextColor="#1D8348" FontAttributes="Bold" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-
-                </StackLayout>
-
-                <Button x:Name="btnSession" Text="Sing In" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
+                <Button x:Name="btnSession" Text="Iniciar sesion" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
 
-                    <Label Text="New User" TextColor="DarkGray" FontSize="Small"/>
-                    <Button Text="Sing Up" TextColor="#1d8348" FontAttributes="Bold" FontSize="Small" Clicked="OnRegisterLabel"/>
+                    <Button Text="Registrate" FontAttributes="Bold" FontSize="Small" Clicked="OnRegisterLabel"/>
                     
                 </StackLayout>
                     
