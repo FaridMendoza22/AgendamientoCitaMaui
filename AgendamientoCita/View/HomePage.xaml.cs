@@ -33,7 +33,7 @@ public partial class HomePage : ContentPage
 
     private void Salir(object sender, EventArgs e)
     {
-        _ = dbService.DeleteCustomer();
+        _ = dbService.DeleteCustomer(App.CustomerInSession!.Rowid);
         App.CustomerInSession = null;
         // Salir de la aplicación
         App.Current!.MainPage = new NavigationPage(new LoginPage());

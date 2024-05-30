@@ -47,11 +47,12 @@ namespace AgendamientoCita
             }
         }
 
-        public async Task DeleteCustomer()
+        public async Task DeleteCustomer(int Rowid)
         {
             try
             {
                 await connection.Table<CustomerInSession>()
+                    .Where(x => x.Rowid == Rowid)
                    .DeleteAsync();
             }
             catch (Exception ex)
