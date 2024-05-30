@@ -24,6 +24,7 @@ namespace AgendamientoCita.View
         private async void CargarCatalogos()
         {
             var catalogos = await ObtenerCatalogosYServicios();
+
             HasData = catalogos.Count > 0;
             HasNoData = !HasData;
             CatalogosCollectionView.ItemsSource = catalogos;

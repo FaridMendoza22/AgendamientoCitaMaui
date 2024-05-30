@@ -60,10 +60,16 @@ public partial class AgendarCitas : ContentPage
 
     async Task GuardarCitaAsync()
     {
+        if(DateOnly.FromDateTime((startDatePicker.Date + startTimePicker.Time)) < DateOnly.FromDateTime(DateTime.Now))
+        {
+            _ = DisplayAlert("Error", "Sólo se admiten fechas a partir de hoy", "Ok");
+            return;
+        }
+
         var Data = new Customer.Entities.Appointment()
         {
-            StartTime = startDatePicker.Date + startTimePicker.Time,
-            EndTime = startDatePicker.Date + endTimePicker.Time,
+            StartTime = (startDatePicker.Date + startTimePicker.Time).ToUniversalTime(),
+            EndTime = (startDatePicker.Date + endTimePicker.Time).ToUniversalTime(),
             State = EnumAppointmentState.Scheduled,
             PaymentState = EnumPaymentState.Pending,
             RowidCustomer = App.CustomerInSession!.Rowid,//Reemplazar por el de la bd,
@@ -82,11 +88,21 @@ public partial class AgendarCitas : ContentPage
             string contenidoRespuesta = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
+                _ = DisplayAlert("Exito", "Se guardó", "Ok");
                 _ = Navigation.PopAsync();
             }
             else
             {
-                _ = DisplayAlert("Error", "No se guardó", "Ok");
+                var Errors = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(contenidoRespuesta);
+
+                if(Errors?.Count > 0)
+                {
+                    _ = DisplayAlert("Error", string.Join(" \n ", Errors.SelectMany(x => x.Value)), "Ok");
+                }
+                else
+                {
+                    _ = DisplayAlert("Error", "No se guardó", "Ok");
+                }
             }
         }
     }

@@ -34,6 +34,12 @@ namespace AgendamientoCita.View
             var citas = await ObtenerCitas();
             var services = await ObtenerServicios();
 
+            foreach (var item in citas)
+            {
+                item.StartTime = item.StartTime.ToLocalTime();
+                item.EndTime = item.EndTime.ToLocalTime();
+            }
+
             foreach (var cita in citas)
             {
                 foreach (var service in cita.Services!)

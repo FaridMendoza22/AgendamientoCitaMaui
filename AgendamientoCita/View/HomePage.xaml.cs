@@ -4,13 +4,13 @@ namespace AgendamientoCita.View;
 
 public partial class HomePage : ContentPage
 {
-    public string TextValue { get; set; } = App.CustomerInSession!.Fullname;
     readonly LocalDbService dbService;
     public HomePage()
 	{
         dbService = MauiProgram.Services.GetService<LocalDbService>()!;
         InitializeComponent();
-	}
+        NameText.Text = App.CustomerInSession?.Fullname;
+    }
     private void AgendarCita(object sender, EventArgs e)
     {
         // Navegar a la página de agendar cita
