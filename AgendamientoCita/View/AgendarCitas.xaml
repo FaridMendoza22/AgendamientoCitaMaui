@@ -21,8 +21,10 @@
         <CollectionView x:Name="collectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="Servicio:" />
-                    <Label Text="{Binding Name}"  />
+                    <VerticalStackLayout>
+                        <Label Text="Servicio:" />
+                        <Label Text="{Binding Name}"  />
+                    </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -2,67 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgendamientoCita.LoginPage"
-             Title="LoginPage"
+             Title="Logín"
              Shell.NavBarIsVisible="False"
              >
-             
-
-    <Grid BackgroundColor="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="220"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-
-        <StackLayout>
-            <Frame BackgroundColor="SkyBlue" HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
-                <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
-            </Frame>
-        </StackLayout>
-
-        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+    <VerticalStackLayout>
+        <ActivityIndicator x:Name="loaderRef" IsVisible="False" />
+        <Grid x:Name="GridRef" BackgroundColor="White" IsVisible="{Binding ShowContent}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="220"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Text="BIENVENIDOS!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-            <Label Grid.Row="2" Text="Inicia sesión para continuar" HorizontalOptions="Center" FontSize="Subtitle"/>
 
-            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="Center">
-                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout>
-                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                            <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-                        <Entry Text="{Binding UserName}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                    </StackLayout>
+            <StackLayout>
+                <Frame BackgroundColor="SkyBlue" HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
+                    <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
                 </Frame>
-                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout>
-                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                            <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-                        <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                    </StackLayout>
-                </Frame>
-
-                <Button x:Name="btnSession" Text="Iniciar sesion" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
-
-                    <Button Text="Registrate" FontAttributes="Bold" FontSize="Small" Clicked="OnRegisterLabel"/>
-                    
-                </StackLayout>
-                    
             </StackLayout>
-            
+
+            <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Text="BIENVENIDOS!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
+                <Label Grid.Row="2" Text="Inicia sesión para continuar" HorizontalOptions="Center" FontSize="Subtitle"/>
+
+                <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="Center">
+                    <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                        <StackLayout>
+                            <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
+                            </Frame>
+                            <Entry Text="{Binding UserName}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                        <StackLayout>
+                            <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                <Image Source="acceso.png" Aspect="AspectFill" Margin="0"/>
+                            </Frame>
+                            <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Button x:Name="btnSession" Text="Iniciar sesion" BackgroundColor="#58d68d" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" Clicked ="OnSignInButtonClicked"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
+
+                        <Button Text="Registrate" FontAttributes="Bold" FontSize="Small" Clicked="OnRegisterLabel"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Grid>
         </Grid>
-    </Grid>
+    </VerticalStackLayout>  
     
 </ContentPage>

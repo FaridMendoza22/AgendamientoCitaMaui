@@ -47,14 +47,19 @@ public partial class AgendarCitas : ContentPage
         servicePicker.ItemsSource = Data;
     }
 
-    void AgregarServicio_Clicked(object sender, EventArgs e)
+    public void AgregarServicio_Clicked(object sender, EventArgs e)
     {
         collectionView.ItemsSource ??= new List<Service>();
 
         ServicesSelected.Add((Service) servicePicker.SelectedItem);
     }
 
-    async Task GuardarCita_Clicked(object sender, EventArgs e)
+    public void GuardarCita_Clicked(object sender, EventArgs e)
+    {
+        _ = GuardarCitaAsync();
+    }
+
+    async Task GuardarCitaAsync()
     {
         var Data = new Customer.Entities.Appointment()
         {
@@ -78,7 +83,8 @@ public partial class AgendarCitas : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 _ = Navigation.PopAsync();
-            }else
+            }
+            else
             {
                 _ = DisplayAlert("Error", "No se guardó", "Ok");
             }

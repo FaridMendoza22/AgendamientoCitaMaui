@@ -14,18 +14,13 @@ namespace AgendamientoCita
     public partial class LoginPage : ContentPage
     {
         readonly LocalDbService dbService;
+        public bool ShowLoader { get; set; }
+        public bool ShowContent { get; set; } = true;
 
         public LoginPage()
         {
             InitializeComponent();
             dbService = MauiProgram.Services.GetService<LocalDbService>()!;
-
-            var User = dbService.GetCustomer().GetAwaiter().GetResult();
-
-            if (User is not null)
-            {
-                App.Current!.MainPage = new NavigationPage(new HomePage());
-            }
 
             BindingContext = new LoginViewModel();
         }
@@ -33,12 +28,18 @@ namespace AgendamientoCita
         private async void OnSignInButtonClicked(object sender, EventArgs e)
         {
             var viewModel = BindingContext as LoginViewModel;
+            loaderRef.IsVisible = true;
+            loaderRef.IsRunning = true;
+            GridRef.IsVisible = false;
             if (viewModel != null)
             {
                 var Customer = await GetCustomer(viewModel.UserName);
 
                 if(Customer is null)
                 {
+                    loaderRef.IsRunning = false;
+                    loaderRef.IsVisible = false;
+                    GridRef.IsVisible = true;
                     await DisplayAlert("Error", "Credenciales inválidas", "OK");
                     return;
                 }
@@ -71,6 +72,10 @@ namespace AgendamientoCita
 
                 btnSession.IsEnabled = true;
             }
+
+            loaderRef.IsRunning = false;
+            loaderRef.IsVisible = false;
+            GridRef.IsVisible = true;
         }
 
         public async Task<Customer.Entities.Customer?> GetCustomer(string Email)
@@ -109,12 +114,19 @@ namespace AgendamientoCita
 
         public async void OnRegisterLabel(object sender, EventArgs e)
         {
+            loaderRef.IsRunning = true;
+            loaderRef.IsVisible = true;
+            GridRef.IsVisible = false;
+
             var viewModel = BindingContext as LoginViewModel;
             if (viewModel != null)
             {
                 if (string.IsNullOrEmpty(viewModel.UserName) || string.IsNullOrEmpty(viewModel.Password))
                 {
                     _ = DisplayAlert("Error", "Llene el formulario para continuar", "OK");
+                    loaderRef.IsRunning = false;
+                    loaderRef.IsVisible = false;
+                    GridRef.IsVisible = true;
                     return;
                 }
 
@@ -134,6 +146,8 @@ namespace AgendamientoCita
 
                 if(newClient is null)
                 {
+                    loaderRef.IsVisible = false;
+                    GridRef.IsVisible = true;
                     _ = DisplayAlert("Error", "No se pudo crear al cliente", "OK");
                     return;
                 }
@@ -163,6 +177,9 @@ namespace AgendamientoCita
 
                 btnSession.IsEnabled = true;
             }
+            loaderRef.IsRunning = false;
+            loaderRef.IsVisible = false;
+            GridRef.IsVisible = true;
         }
 
         public async Task<Customer.Entities.Customer?> CreateCustomer(Customer.Entities.Customer Customer)
